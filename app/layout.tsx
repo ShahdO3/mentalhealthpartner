@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Changa } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,10 +17,15 @@ const changa = Changa({
   //  display: 'swap',
    variable: '--font-changa' 
   })
+  
+const kasepi = localFont({
+  src: 'fonts/Kasepi-Sans.ttf',
+  variable:'--font-kasepi',
+})
 
 export const metadata: Metadata = {
   title: "SoulSpark",
-  description: "Your Mental Health Assistant",
+  description: "Brought to you by Shadow Productions",
 };
 
 export default function RootLayout({
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <html data-theme="forest" lang="en">
       <body
-        className={changa.className}
+        className={kasepi.className}
       >
         {children}
       </body>

@@ -65,8 +65,13 @@ const FeelingInput = () => {
 
         <span>
             <br/>
+            {loading &&(
+                <div className="chat chat-start">
+                    <span className="loading chat-bubble loading-dots"></span>
+                </div>
+            )}
             
-            <div className='flex bg-neutral rounded-2xl mt-4 p-2 whitespace-pre-line'> {msg} </div>
+            <div className='chat chat-start flex bg-neutral rounded-2xl mt-4 p-2 whitespace-pre-line'> {msg} </div>
         </span>
     </div>
   )
