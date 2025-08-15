@@ -47,32 +47,34 @@ const FeelingInput = () => {
     
 
   return (
-    <div className="w-fit gap-2 m-10 ">
+    <div className="w-fit m-10">
         <form
+            className='join rounded-2xl'
             id='feelingsFrom'
             onSubmit={handleSubmission}> 
             <input 
-                className="input input-lg w-fit" 
+                className="input input-lg w-full join-item" 
                 placeholder="How we feeling today love?"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}/>
 
             <button 
                 type='submit'
-                className='btn btn-md self-center rounded-2xl'
+                className='btn btn-lg self-center  join-item'
                 disabled={loading}>Send</button>
         </form>
 
-        <span>
+        <div>
             <br/>
-            {loading &&(
+            {loading ? (
                 <div className="chat chat-start">
                     <span className="loading chat-bubble loading-dots"></span>
                 </div>
-            )}
+            ):(
+                <div className='chat chat-start flex bg-neutral rounded-2xl mt-4 p-2 whitespace-pre-line'> {msg} </div>
+                )}
+        </div>
             
-            <div className='chat chat-start flex bg-neutral rounded-2xl mt-4 p-2 whitespace-pre-line'> {msg} </div>
-        </span>
     </div>
   )
 }

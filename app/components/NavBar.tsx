@@ -6,9 +6,32 @@ import { link } from 'fs';
 import { usePathname } from 'next/navigation';
 // import classNames from 'classnames';
 import Image from 'next/image';
-import ThemeSwitcher from './ThemeSwitcher';
+import ThemeSwitcher from './ThemeSwitcher';  
+import { useEffect, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { LetterFx } from '@once-ui-system/core';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+    
 
 const NavBar = () => {
+  const boxRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo(boxRef.current, { opacity: 0, y: 50 }, {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: boxRef.current,
+        start: "top 80%",
+        end: "top 30%",
+        scrub: true,
+      }
+    });
+  }, { scope: boxRef });
 
   const currentPathN = usePathname();
 
@@ -17,41 +40,19 @@ const NavBar = () => {
     {label: 'Issues', href: '/issues'}
     
   ]
+  const charSet = ["fhu&d#8d2"];
 
   return (
-    <div className="navbar bg-base-300 shadow-md shadow-stone-900 rounded-4xl p-2 mb-10">
-    <div className="navbar-start pl-3">
-      {/* <ul
-        tabIndex={0}
-        className="z-1">
-
-          {links.map(link =>
-            <Link 
-            key={link.href}
-            className={classNames({
-              'opacity-100 font-extrabold ': link.href == currentPathN,
-              'opacity-70 font-medium': link.href != currentPathN,
-              'hover:opacity-100 transition-colors p-2 text-base': true,
-            })}
-            href={link.href}>{link.label}</Link>
-          )}
-        </ul> */}
+    <div ref={boxRef} className="navbar sticky shadow-md shadow-accent rounded-xl p-2 mb-10">
+      <div className="navbar-start pl-3">
+        <a className='btn btn-ghost rounded-4xl'>SoulSpark</a>
       </div>
-      <div className="navbar-center ">
-        SoulSpark
-        {/* <button className='btn btn-ghost'>
-            <Image src={'/bugged-out-high-resolution-logo-transparent.png'} alt='Bugged Out Logo' width={120} height={50} />
-        </button> */}
+      <div className="navbar-center">
       </div>
       <div className="navbar-end">
-      {/* <div className="avatar pr-2">
-        <div className="w-7 rounded-full ">
-          <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
-        </div>
-      </div> */}
-      <ThemeSwitcher/>
-  </div>
-</div>
+        <ThemeSwitcher/>
+      </div>
+    </div>
   )
 }
 

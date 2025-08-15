@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Changa } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
+import { gsap } from "gsap";
+import { IconProvider, LayoutProvider, ToastProvider } from "@once-ui-system/core";
+import { HiHome } from "react-icons/hi2";
+import BlobsBackground from "./components/BlobsBackground";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +23,9 @@ const changa = Changa({
    variable: '--font-changa' 
   })
   
-const kasepi = localFont({
-  src: 'fonts/Kasepi-Sans.ttf',
-  variable:'--font-kasepi',
+const poppins = localFont({
+  src: 'fonts/Poppins-Medium.ttf',
+  variable:'--font-poppins-medium',
 })
 
 export const metadata: Metadata = {
@@ -34,11 +39,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="forest" lang="en">
+    <html data-theme="mentalHealthDark" lang="en">
       <body
-        className={kasepi.className}
-      >
-        {children}
+        className={poppins.className}>
+        <LayoutProvider>
+          <IconProvider>
+            <ToastProvider>
+              <BlobsBackground/>
+              {children}
+            </ToastProvider>
+          </IconProvider>
+        </LayoutProvider>
       </body>
     </html>
   );
